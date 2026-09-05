@@ -23,6 +23,14 @@ The Buttercup project has come to an end, and these repositories are in transiti
 
 ---
 
+ℹ️ **About this fork**
+
+This is an independent fork of the original [Buttercup browser extension](https://github.com/buttercup/buttercup-browser-extension), archived by its maintainers, now maintained by **ByteWerk Labs** to rebuild, modernize and keep the extension working alongside our [buttercup-desktop fork](https://github.com/ByteWerk-Labs/buttercup-desktop).
+
+This fork is not affiliated with, endorsed by, or supported by the original Buttercup maintainers. It has not yet undergone an independent security audit (this line will be removed once/if one happens).
+
+---
+
 ## About
 This browser extension allows users to interface with password archives authored by the [Buttercup password manager](https://github.com/buttercup-pw/buttercup) (it _requires_ v2.26 and later of the desktop application to be installed to function).
 

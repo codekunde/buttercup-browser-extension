@@ -21,6 +21,9 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const DIST = path.resolve(__dirname, "dist");
 const ICONS_PATH = path.join(path.dirname(require.resolve("@buttercup/ui")), "icons");
 
+// copy-webpack-plugin's glob matcher requires forward slashes, even on Windows
+const toGlob = (p) => p.split(path.sep).join("/");
+
 if (!BROWSER) {
     throw new Error("BROWSER must be specified");
 }
@@ -172,12 +175,12 @@ export default [
             new CopyWebpackPlugin({
                 patterns: [
                     {
-                        from: path.join(__dirname, "./resources", "buttercup-*.png"),
+                        from: toGlob(path.join(__dirname, "./resources", "buttercup-*.png")),
                         to: path.join(DIST, "manifest-res"),
                         context: path.join(__dirname, "./resources")
                     },
                     {
-                        from: path.join(ICONS_PATH, "/*"),
+                        from: toGlob(path.join(ICONS_PATH, "/*")),
                         to: path.join(DIST, "scripts/icons"),
                         context: ICONS_PATH
                     }
