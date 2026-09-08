@@ -1,5 +1,12 @@
 # Buttercup browser extension changelog
 
+## Unreleased
+_Codekunde fork_
+
+ * ([#474](https://github.com/buttercup/buttercup-browser-extension/issues/474)) Focus the search field when the popup opens
+ * Build fixes: Node 22+ compatibility, Windows-compatible `build`/`dev` scripts, LF normalisation
+ * Fork rebrand: extension name, Firefox add-on ID, `@buttercup/locust` pinned
+
 ## v3.2.0
 _2024-04-09_
 

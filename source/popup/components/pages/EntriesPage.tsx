@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo, useState } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import { Button, InputGroup, Intent, NonIdealState, Spinner } from "@blueprintjs/core";
 import { SearchResult, VaultSourceStatus } from "buttercup";
@@ -176,10 +176,20 @@ function EntriesPageList(props: EntriesPageProps) {
 
 export function EntriesPageControls(props: EntriesPageControlsProps) {
     const desktopState = useDesktopConnectionState();
+    const searchInputRef = useRef<HTMLInputElement | null>(null);
+    const connected = desktopState === DesktopConnectionState.Connected;
+    // Focus the search field as soon as it becomes usable, so the popup is
+    // immediately keyboard-ready (buttercup-browser-extension#474)
+    useEffect(() => {
+        if (connected && searchInputRef.current) {
+            searchInputRef.current.focus();
+        }
+    }, [connected]);
     return (
         <>
             <Input
-                disabled={desktopState !== DesktopConnectionState.Connected}
+                disabled={!connected}
+                inputRef={searchInputRef}
                 onChange={evt => props.onSearchTermChange(evt.target.value)}
                 placeholder={t("popup.entries.search.placeholder")}
                 round

@@ -1,5 +1,6 @@
 *.log
 .DS_Store
+TODO.md
 .history
 node_modules
 /dist
