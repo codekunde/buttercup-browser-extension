@@ -9,9 +9,9 @@ import { merge } from "webpack-merge";
 import PugPlugin from "pug-plugin";
 import sass from "sass";
 
-import packageInfo from "./package.json" assert { type: "json" };
-import manifestV2 from "./resources/manifest.v2.json" assert { type: "json" };
-import manifestV3 from "./resources/manifest.v3.json" assert { type: "json" };
+import packageInfo from "./package.json" with { type: "json" };
+import manifestV2 from "./resources/manifest.v2.json" with { type: "json" };
+import manifestV3 from "./resources/manifest.v3.json" with { type: "json" };
 
 const { BannerPlugin, DefinePlugin } = webpack;
 const { BROWSER } = process.env;
