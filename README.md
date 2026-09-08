@@ -40,7 +40,7 @@ The extension makes secured requests to the desktop application for information 
 
 ### Forms & Logins
 
-Buttercup for Browsers auto-detects some login forms and login inputs, allowing the user to auto-fill them at their discretion. This extension uses [Locust](https://github.com/buttercup/locust) under the hood to **detect forms and inputs** (any issues with detecting forms and inputs should be opened there).
+Buttercup for Browsers auto-detects some login forms and login inputs, allowing the user to auto-fill them at their discretion. This extension uses [Locust](https://github.com/buttercup/locust) under the hood to **detect forms and inputs**. Codekunde maintains a mirror at [codekunde/locust](https://github.com/codekunde/locust); the extension currently depends on the published `@buttercup/locust` npm release.
 
 ### Supported browsers
 
