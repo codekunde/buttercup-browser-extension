@@ -1,9 +1,10 @@
 {
     "manifest_version": 2,
 
-    "name": "Buttercup",
-    "description": "Browser extension for Buttercup, the secure and easy-to-use password manager.",
+    "name": "Buttercup (Codekunde)",
+    "description": "Browser extension for Buttercup, the secure and easy-to-use password manager. Independent fork maintained by Codekunde.",
     "version": "0.0.0",
+    "homepage_url": "https://github.com/codekunde/buttercup-browser-extension",
 
     "icons": {
         "256": "manifest-res/buttercup-256.png",
@@ -46,9 +47,9 @@
         "*.jpg"
     ],
 
-    "applications": {
+    "browser_specific_settings": {
         "gecko": {
-            "id": "{10e7d273-2e63-47c9-82af-76c45dc1b624}"
+            "id": "{245ac273-f695-41d0-836f-ffe171c92cce}"
         }
     }
 }

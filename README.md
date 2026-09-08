@@ -29,6 +29,8 @@ This is an independent fork of the original [Buttercup browser extension](https:
 
 This fork is not affiliated with, endorsed by, or supported by the original Buttercup maintainers. It has not yet undergone an independent security audit (this line will be removed once/if one happens).
 
+Releases, version tags and (eventual) store listings originate from Codekunde and are not continuations of the upstream project's releases. See [FORK.md](FORK.md) for maintenance notes: extension identity, the self-generated Firefox add-on ID, store-listing status and dependency strategy. The store badges above still point at the archived upstream listings.
+
 ---
 
 ## About
