@@ -91,6 +91,15 @@ function EntriesPageList(props: EntriesPageProps) {
         [sources]
     );
     const searchedEntries = useSearchedEntries(props.searchTerm);
+    const sourceNames = useMemo<Record<string, string> | undefined>(() => {
+        // Only worth showing which vault an entry belongs to when more than
+        // one vault is connected (buttercup-browser-extension#473)
+        if (sources.length <= 1) return undefined;
+        return sources.reduce((output, source) => {
+            output[source.id] = source.name;
+            return output;
+        }, {} as Record<string, string>);
+    }, [sources]);
     const { formID, source: popupSource, url } = useContext(LaunchContext);
     const [selectedEntryInfo, setSelectedEntryInfo] = useState<SearchResult | null>(null);
     const urlEntries = useEntriesForURL(url);
@@ -148,6 +157,7 @@ function EntriesPageList(props: EntriesPageProps) {
             ) || searchedEntries.length > 0 && (
                 <EntryItemList
                     entries={searchedEntries}
+                    sourceNames={sourceNames}
                     onEntryAutoClick={handleEntryAutoLoginClick}
                     onEntryClick={handleEntryBodyClick}
                     onEntryInfoClick={handleEntryInfoClick}
@@ -164,6 +174,7 @@ function EntriesPageList(props: EntriesPageProps) {
                         "URL Entries": urlEntries,
                         "Recents": recentEntries
                     }}
+                    sourceNames={sourceNames}
                     onEntryAutoClick={handleEntryAutoLoginClick}
                     onEntryClick={handleEntryBodyClick}
                     onEntryInfoClick={handleEntryInfoClick}

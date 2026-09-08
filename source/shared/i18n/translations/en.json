@@ -155,6 +155,11 @@
             "click": {
                 "no-url-available": "No URL available for this OTP",
                 "open-error": "Could not open page for OTP: {{message}}"
+            },
+            "copy": {
+                "error": "Failed copying OTP code: {{message}}",
+                "success": "Copied OTP code to clipboard",
+                "tooltip": "Copy code"
             }
         },
         "tab": {

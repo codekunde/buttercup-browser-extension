@@ -8,9 +8,14 @@ import { t } from "../../../shared/i18n/trans.js";
 
 interface EntryItemListProps {
     entries: Array<SearchResult> | Record<string, Array<SearchResult>>;
+    sourceNames?: Record<string, string>;
     onEntryAutoClick: (entry: SearchResult) => void;
     onEntryClick: (entry: SearchResult) => void;
     onEntryInfoClick: (entry: SearchResult) => void;
+}
+
+function vaultNameForEntry(entry: SearchResult, sourceNames?: Record<string, string>): string | null {
+    return (entry.sourceID && sourceNames?.[entry.sourceID]) || null;
 }
 
 const ScrollList = styled.div`
@@ -22,7 +27,7 @@ const ScrollList = styled.div`
 `;
 
 export function EntryItemList(props: EntryItemListProps) {
-    const { entries, onEntryAutoClick, onEntryClick, onEntryInfoClick } = props;
+    const { entries, sourceNames, onEntryAutoClick, onEntryClick, onEntryInfoClick } = props;
     const [config] = useConfig();
     if (!config) return null;
     return (
@@ -34,6 +39,7 @@ export function EntryItemList(props: EntryItemListProps) {
                             <EntryItem
                                 entry={entry}
                                 fetchIcons={config.entryIcons}
+                                vaultName={vaultNameForEntry(entry, sourceNames)}
                                 onAutoClick={() => onEntryAutoClick(entry)}
                                 onClick={() => onEntryClick(entry)}
                                 onInfoClick={() => onEntryInfoClick(entry)}
@@ -54,6 +60,7 @@ export function EntryItemList(props: EntryItemListProps) {
                                             <EntryItem
                                                 entry={entry}
                                                 fetchIcons={config.entryIcons}
+                                                vaultName={vaultNameForEntry(entry, sourceNames)}
                                                 onAutoClick={() => onEntryAutoClick(entry)}
                                                 onClick={() => onEntryClick(entry)}
                                                 onInfoClick={() => onEntryInfoClick(entry)}

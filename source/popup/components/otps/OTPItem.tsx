@@ -1,10 +1,14 @@
-import React, { useCallback, useMemo } from "react";
+import React, { MouseEvent, useCallback, useMemo } from "react";
 import styled from "styled-components";
 import cn from "classnames";
-import { Classes, Intent, Spinner, Text } from "@blueprintjs/core";
+import { Button, Classes, Intent, Spinner, Text } from "@blueprintjs/core";
 import { SiteIcon } from "@buttercup/ui";
 import { extractDomain } from "../../../shared/library/domain.js";
 import { PreparedOTP } from "../../hooks/otp.js";
+import { copyTextToClipboard } from "../../services/clipboard.js";
+import { getToaster } from "../../../shared/services/notifications.js";
+import { localisedErrorMessage } from "../../../shared/library/error.js";
+import { t } from "../../../shared/i18n/trans.js";
 
 interface OTPItemProps {
     otp: PreparedOTP;
@@ -82,6 +86,24 @@ export function OTPItem(props: OTPItemProps) {
     const handleOTPClick = useCallback(() => {
         onClick();
     }, [onClick]);
+    const handleCopyClick = useCallback(async (evt: MouseEvent) => {
+        evt.preventDefault();
+        evt.stopPropagation();
+        try {
+            await copyTextToClipboard(otp.digits);
+            getToaster().show({
+                intent: Intent.SUCCESS,
+                message: t("popup.otps.copy.success"),
+                timeout: 4000
+            });
+        } catch (err) {
+            getToaster().show({
+                intent: Intent.DANGER,
+                message: t("popup.otps.copy.error", { message: localisedErrorMessage(err) }),
+                timeout: 10000
+            });
+        }
+    }, [otp.digits]);
     const [codeFirst, codeSecond] = useMemo(() => {
         if (otp.errored) return [otp.digits, ""];
         return otp.digits.length === 8
@@ -120,6 +142,14 @@ export function OTPItem(props: OTPItemProps) {
                     />
                     <OTPCodePart>{codeFirst}</OTPCodePart>
                     <OTPCodePart>{codeSecond}</OTPCodePart>
+                    {!otp.errored && (
+                        <Button
+                            icon="clipboard"
+                            minimal
+                            onClick={handleCopyClick}
+                            title={t("popup.otps.copy.tooltip")}
+                        />
+                    )}
                 </OTPCode>
             </OTPRow>
         </Container>

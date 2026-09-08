@@ -1,7 +1,7 @@
 import React, { MouseEvent, useCallback, useContext, useMemo } from "react";
 import styled from "styled-components";
 import cn from "classnames";
-import { Button, ButtonGroup, Classes, Text } from "@blueprintjs/core";
+import { Button, ButtonGroup, Classes, Tag, Text } from "@blueprintjs/core";
 import { SearchResult, VaultSourceStatus } from "buttercup";
 import { SiteIcon } from "@buttercup/ui";
 import { LaunchContext } from "../contexts/LaunchContext.js";
@@ -12,6 +12,7 @@ import { t } from "../../../shared/i18n/trans.js";
 interface EntryItemProps {
     entry: SearchResult;
     fetchIcons: boolean;
+    vaultName?: string | null;
     onAutoClick: () => void;
     onClick: () => void;
     onInfoClick: () => void;
@@ -46,6 +47,10 @@ const EntryIcon = styled(SiteIcon)`
 const Title = styled(Text)`
     margin-bottom: 0.3rem;
 `;
+const VaultName = styled(Tag)`
+    margin-top: 0.35rem;
+    max-width: 100%;
+`;
 const EntryIconBackground = styled.div`
     width: 2.5rem;
     height: 2.5rem;
@@ -66,6 +71,7 @@ export function EntryItem(props: EntryItemProps) {
     const {
         entry,
         fetchIcons,
+        vaultName,
         onAutoClick,
         onClick,
         onInfoClick
@@ -114,6 +120,11 @@ export function EntryItem(props: EntryItemProps) {
                     <CenteredText ellipsize className={cn(Classes.TEXT_SMALL, Classes.TEXT_MUTED)}>
                         {entry.properties.username} {entry.properties.url && `@ ${entry.properties.url}` || ""}
                     </CenteredText>
+                    {vaultName && (
+                        <VaultName icon="box" minimal>
+                            <Text ellipsize title={vaultName}>{vaultName}</Text>
+                        </VaultName>
+                    )}
                 </DetailRow>
                 {popupSource === "popup" && (
                     <ButtonGroup>

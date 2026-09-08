@@ -4,6 +4,8 @@
 _Codekunde fork_
 
  * ([#474](https://github.com/buttercup/buttercup-browser-extension/issues/474)) Focus the search field when the popup opens
+ * ([#473](https://github.com/buttercup/buttercup-browser-extension/issues/473)) Show the vault name on entry results when more than one vault is connected
+ * ([#485](https://github.com/buttercup/buttercup-browser-extension/issues/485)) Copy an OTP code to the clipboard from the popover
  * Build fixes: Node 22+ compatibility, Windows-compatible `build`/`dev` scripts, LF normalisation
  * Fork rebrand: extension name, Firefox add-on ID, `@buttercup/locust` pinned
 
