@@ -103,7 +103,7 @@
     "resolve-typescript-plugin": "^2.0.1",
     "rimraf": "^5.0.5",
     "sass": "^1.69.5",
-    "sass-loader": "^13.3.2",
+    "sass-loader": "^14.2.1",
     "style-loader": "^3.3.3",
     "styled-components": "^5.3.11",
     "ts-loader": "^9.5.0",

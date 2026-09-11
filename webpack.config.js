@@ -7,7 +7,6 @@ import ResolveTypeScriptPlugin from "resolve-typescript-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import { merge } from "webpack-merge";
 import PugPlugin from "pug-plugin";
-import * as sass from "sass";
 
 import packageInfo from "./package.json" with { type: "json" };
 import manifestV2 from "./resources/manifest.v2.json" with { type: "json" };
@@ -87,7 +86,7 @@ function getBaseConfig() {
                         {
                             loader: "sass-loader",
                             options: {
-                                implementation: sass
+                                api: "modern"
                             }
                         }
                     ]
