@@ -130,9 +130,6 @@ function renderButtonStyle(input: HTMLInputElement, onClick: () => void, reattac
     };
     // @ts-ignore
     mount(input.offsetParent, button);
-    onElementDismount(button, () => {
-        reattachCB();
-    });
     const reprocessButton = () => {
         try {
             left = calculateLeft();
@@ -144,10 +141,27 @@ function renderButtonStyle(input: HTMLInputElement, onClick: () => void, reattac
         } catch (err) {
             clearInterval(reprocessInterval);
             removeOnBodyWidthResize();
+            document.removeEventListener("visibilitychange", handleVisibilityChange);
         }
     };
+    // Browsers throttle setInterval heavily in background tabs (down to
+    // roughly once a minute), so a layout shift that happens while this tab
+    // is hidden only gets corrected once the throttled timer next fires -
+    // visible as the button "jumping" once you switch back
+    // (buttercup-browser-extension#499). Reposition immediately instead of
+    // waiting for that.
+    const handleVisibilityChange = () => {
+        if (document.visibilityState === "visible") {
+            reprocessButton();
+        }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
     const removeOnBodyWidthResize = onBodyWidthResize(reprocessButton);
     const reprocessInterval = setInterval(reprocessButton, 1250);
+    onElementDismount(button, () => {
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+        reattachCB();
+    });
     reprocessButton();
 }
 

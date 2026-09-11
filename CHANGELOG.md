@@ -17,6 +17,9 @@ _Codekunde fork_
    * ([#495](https://github.com/buttercup/buttercup-browser-extension/issues/495)) "No API client ID set" after using the popup's Reconnect flow - it was clearing the client ID without ever regenerating it
    * ([#488](https://github.com/buttercup/buttercup-browser-extension/issues/488)) Desktop connection failures now show an actionable message (can't reach the app / connection rejected / other) instead of a raw "Desktop request failed: 403 Forbidden"
  * Shortened toast durations: success/confirmation toasts 3-4s -> 2s, error toasts 10s -> 5s; shortened the OTP-copied toast text to "OTP copied"
+ * Toasts sized to their message instead of Blueprint's 300px minimum
+ * **Bugfix**:
+   * ([#499](https://github.com/buttercup/buttercup-browser-extension/issues/499)) Injected launch button "jumping" after switching browser tabs and back - it now repositions immediately on tab visibility change instead of waiting for a throttled background-tab timer
  * Build fixes: Node 22+ compatibility, Windows-compatible `build`/`dev` scripts, LF normalisation
  * Fork rebrand: extension name, Firefox add-on ID, `@buttercup/locust` pinned
 
