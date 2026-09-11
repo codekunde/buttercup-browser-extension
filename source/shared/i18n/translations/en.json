@@ -128,9 +128,13 @@
                 "open-error": "Could not open page for entry: {{message}}",
                 "recent-set-error": "Failed recording recent entry: {{message}}"
             },
+            "copy": {
+                "password-tooltip": "Copy password",
+                "username-tooltip": "Copy username"
+            },
             "info": {
                 "copy-error": "Failed copying value: {{message}}",
-                "copy-success": "Copied value to clipboard: {{property}}",
+                "copy-success": "{{property}} copied",
                 "copy-tooltip": "Copy to clipoard",
                 "tooltip": "Show entry properties"
             },

@@ -6,6 +6,11 @@ _Codekunde fork_
  * ([#474](https://github.com/buttercup/buttercup-browser-extension/issues/474)) Focus the search field when the popup opens
  * ([#473](https://github.com/buttercup/buttercup-browser-extension/issues/473)) Show the vault name on entry results when more than one vault is connected
  * ([#485](https://github.com/buttercup/buttercup-browser-extension/issues/485)) Copy an OTP code to the clipboard from the popover
+ * Copy username / copy password buttons on each entry result row (popup mode)
+ * Shortened the copy-to-clipboard toast to "{{property}} copied" (was "Copied value to clipboard: {{property}}")
+ * **Bugfix**:
+   * "Save Login" prompt reappearing after clicking Disable on a multi-domain/SSO login (e.g. federated Microsoft logins) — the credential's save-prompt flag was never cleared on Disable, only on Close
+   * ([#482](https://github.com/buttercup/buttercup-browser-extension/issues/482)) Autofilled fields not registering as filled on some SPA login forms (e.g. Microsoft/Okta-style "Next" button staying disabled) — added a keyboard-event nudge after fill, partial fix
  * Build fixes: Node 22+ compatibility, Windows-compatible `build`/`dev` scripts, LF normalisation
  * Fork rebrand: extension name, Firefox add-on ID, `@buttercup/locust` pinned
 

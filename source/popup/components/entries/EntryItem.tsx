@@ -1,13 +1,16 @@
 import React, { MouseEvent, useCallback, useContext, useMemo } from "react";
 import styled from "styled-components";
 import cn from "classnames";
-import { Button, ButtonGroup, Classes, Tag, Text } from "@blueprintjs/core";
+import { Button, ButtonGroup, Classes, Intent, Tag, Text } from "@blueprintjs/core";
 import { SearchResult, VaultSourceStatus } from "buttercup";
 import { SiteIcon } from "@buttercup/ui";
 import { LaunchContext } from "../contexts/LaunchContext.js";
 import { extractEntryDomain } from "../../../shared/library/domain.js";
 import { Tooltip2 } from "@blueprintjs/popover2";
 import { t } from "../../../shared/i18n/trans.js";
+import { copyTextToClipboard } from "../../services/clipboard.js";
+import { getToaster } from "../../../shared/services/notifications.js";
+import { localisedErrorMessage } from "../../../shared/library/error.js";
 
 interface EntryItemProps {
     entry: SearchResult;
@@ -104,6 +107,24 @@ export function EntryItem(props: EntryItemProps) {
         evt.stopPropagation();
         onInfoClick();
     }, [onInfoClick]);
+    const handleCopyClick = useCallback((property: string, value: string) => async (evt: MouseEvent) => {
+        evt.preventDefault();
+        evt.stopPropagation();
+        try {
+            await copyTextToClipboard(value);
+            getToaster().show({
+                intent: Intent.SUCCESS,
+                message: t("popup.entries.info.copy-success", { property }),
+                timeout: 4000
+            });
+        } catch (err) {
+            getToaster().show({
+                intent: Intent.DANGER,
+                message: t("popup.entries.info.copy-error", { message: localisedErrorMessage(err) }),
+                timeout: 10000
+            });
+        }
+    }, []);
     return (
         <Container isActive={false} onClick={handleEntryClick}>
             <EntryRow>
@@ -128,6 +149,28 @@ export function EntryItem(props: EntryItemProps) {
                 </DetailRow>
                 {popupSource === "popup" && (
                     <ButtonGroup>
+                        {entry.properties.username && (
+                            <Tooltip2
+                                content={t("popup.entries.copy.username-tooltip")}
+                            >
+                                <Button
+                                    icon="user"
+                                    minimal
+                                    onClick={handleCopyClick("Username", entry.properties.username)}
+                                />
+                            </Tooltip2>
+                        )}
+                        {entry.properties.password && (
+                            <Tooltip2
+                                content={t("popup.entries.copy.password-tooltip")}
+                            >
+                                <Button
+                                    icon="key"
+                                    minimal
+                                    onClick={handleCopyClick("Password", entry.properties.password)}
+                                />
+                            </Tooltip2>
+                        )}
                         <Tooltip2
                             content={t("popup.entries.auto-login.tooltip")}
                         >

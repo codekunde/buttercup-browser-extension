@@ -132,6 +132,13 @@ async function handleMessage(
             } catch (err) {
                 throw new Layerr(err, "Failed disabling save prompt for domain");
             }
+            // Also stop prompting for this specific credentials entry, same as
+            // ClearSavedCredentialsPrompt does. Without this, a captured login
+            // that survives across a multi-domain redirect (SSO/federated
+            // login flows) re-triggers the save prompt on the next hop, since
+            // the new domain isn't in the disabled list yet the credentials
+            // are still marked promptSave=true.
+            stopPromptForID(credentialsID);
             await sendTabsMessage({
                 type: TabEventType.CloseSaveDialog
             });
