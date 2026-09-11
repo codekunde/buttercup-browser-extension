@@ -20,6 +20,11 @@ body
 .bp4-input:focus, .bp4-input.bp4-active
     box-shadow: inset 0 0 0 1px $bc-brand-colour, 0 0 0 2px rgba(45, 114, 210, 0.3), inset 0 1px 1px rgba(17, 20, 24, 0.2)
 
+// Blueprint's default toast width (min-width: 300px) is nearly as wide as
+// the whole popup - size toasts to their message instead
+.bp4-toast
+    min-width: auto
+
 a
     color: $bc-brand-colour-dark
 
