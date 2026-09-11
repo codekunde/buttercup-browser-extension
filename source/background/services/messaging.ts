@@ -81,7 +81,13 @@ async function handleMessage(
         }
         case BackgroundMessageType.ClearDesktopAuthentication: {
             log("clear desktop authentication");
-            await removeLocalValue(LocalStorageItem.APIClientID);
+            // Only forget the desktop's authorisation (APIServerPublicKey) -
+            // NOT the client ID. This is used by the popup's "Reconnect" flow
+            // (shown on a connection error) to re-request a fresh auth code
+            // while keeping this browser's own identity. Removing the client
+            // ID here left it unset until the next full Settings reset,
+            // so the very next authenticateBrowserAccess() call threw
+            // "No API client ID set" (buttercup-browser-extension#495).
             await removeLocalValue(LocalStorageItem.APIServerPublicKey);
             sendResponse({});
             break;

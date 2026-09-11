@@ -102,7 +102,7 @@ export function SaveDialogPage() {
             getToaster().show({
                 intent: Intent.DANGER,
                 message: t("error.generic", { message: localisedErrorMessage(err) }),
-                timeout: 10000
+                timeout: 5000
             });
         }
     }, [loginID]);
@@ -116,7 +116,7 @@ export function SaveDialogPage() {
             getToaster().show({
                 intent: Intent.DANGER,
                 message: t("error.generic", { message: localisedErrorMessage(err) }),
-                timeout: 10000
+                timeout: 5000
             });
         }
     }, [loginID]);
@@ -134,7 +134,7 @@ export function SaveDialogPage() {
             getToaster().show({
                 intent: Intent.DANGER,
                 message: t("error.generic", { message: localisedErrorMessage(err) }),
-                timeout: 10000
+                timeout: 5000
             });
         }
     }, [disableConfirm, loginID]);
@@ -145,7 +145,7 @@ export function SaveDialogPage() {
             getToaster().show({
                 intent: Intent.DANGER,
                 message: t("save-credentials-dialog.credentials-fetch-error", { message: localisedErrorMessage(credentials.error) }),
-                timeout: 10000
+                timeout: 5000
             });
         }
     }, [credentials]);

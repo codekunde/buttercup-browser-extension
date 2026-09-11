@@ -32,7 +32,7 @@ export function sendOTPToTabForInput(formID: string, otp: OTP): void {
         getToaster().show({
             intent: Intent.DANGER,
             message: t("error.otp-generate", { message: localisedErrorMessage(err) }),
-            timeout: 10000
+            timeout: 5000
         });
     }
     sendTabEvent({

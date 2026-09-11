@@ -20,7 +20,7 @@ export function ConnectPage() {
                 getToaster().show({
                     intent: Intent.SUCCESS,
                     message: t("connect-page.auth-success"),
-                    timeout: 3000
+                    timeout: 2000
                 });
                 setTimeout(() => {
                     closeCurrentTab();
@@ -31,7 +31,7 @@ export function ConnectPage() {
                 getToaster().show({
                     intent: Intent.DANGER,
                     message: t("connect-page.auth-error", { message: localisedErrorMessage(err) }),
-                    timeout: 10000
+                    timeout: 5000
                 });
                 setAuthenticating(false);
             });

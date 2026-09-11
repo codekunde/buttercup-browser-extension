@@ -28,7 +28,7 @@ export function VaultItemList(props: VaultItemListProps) {
                     getToaster().show({
                         intent: Intent.SUCCESS,
                         message: t("popup.vault.locking.success", { vault: vault.name }),
-                        timeout: 4000
+                        timeout: 2000
                     });
                 }
             })
@@ -37,7 +37,7 @@ export function VaultItemList(props: VaultItemListProps) {
                 getToaster().show({
                     intent: Intent.DANGER,
                     message: t("popup.vault.locking.error", { message: localisedErrorMessage(err) }),
-                    timeout: 10000
+                    timeout: 5000
                 });
             });
     }, []);
@@ -47,7 +47,7 @@ export function VaultItemList(props: VaultItemListProps) {
             getToaster().show({
                 intent: Intent.DANGER,
                 message: t("popup.vault.unlocking.error", { message: localisedErrorMessage(err) }),
-                timeout: 10000
+                timeout: 5000
             });
         });
     }, []);

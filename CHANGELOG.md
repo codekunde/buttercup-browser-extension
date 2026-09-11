@@ -13,6 +13,10 @@ _Codekunde fork_
    * ([#482](https://github.com/buttercup/buttercup-browser-extension/issues/482)) Autofilled fields not registering as filled on some SPA login forms (e.g. Microsoft/Okta-style "Next" button staying disabled) — added a keyboard-event nudge after fill, partial fix
    * ([#486](https://github.com/buttercup/buttercup-browser-extension/issues/486)) Popup crash when Chrome's Site access is set to "On click" — background message handling could run before the service worker finished initialising, and vault-source lookups could crash on an unexpected empty response
  * Removed a build-time Sass deprecation warning (`sass-loader` bumped to 14.2.1 with the modern compiler API; no output change)
+ * **Bugfix**:
+   * ([#495](https://github.com/buttercup/buttercup-browser-extension/issues/495)) "No API client ID set" after using the popup's Reconnect flow - it was clearing the client ID without ever regenerating it
+   * ([#488](https://github.com/buttercup/buttercup-browser-extension/issues/488)) Desktop connection failures now show an actionable message (can't reach the app / connection rejected / other) instead of a raw "Desktop request failed: 403 Forbidden"
+ * Shortened toast durations: success/confirmation toasts 3-4s -> 2s, error toasts 10s -> 5s; shortened the OTP-copied toast text to "OTP copied"
  * Build fixes: Node 22+ compatibility, Windows-compatible `build`/`dev` scripts, LF normalisation
  * Fork rebrand: extension name, Firefox add-on ID, `@buttercup/locust` pinned
 

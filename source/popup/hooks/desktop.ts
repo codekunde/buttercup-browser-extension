@@ -33,7 +33,7 @@ export function useDesktopConnectionState(): DesktopConnectionState {
             {
                 intent: Intent.DANGER,
                 message,
-                timeout: 10000
+                timeout: 5000
             },
             btoa(message)
         );
@@ -61,7 +61,7 @@ export function useEntriesForURL(url: string | null): Array<SearchResult> {
         getToaster().show({
             intent: Intent.DANGER,
             message: t("error.desktop.search-failed", { message: localisedErrorMessage(error) }),
-            timeout: 10000
+            timeout: 5000
         });
     }, [error]);
     return value === null ? [] : value;
@@ -81,7 +81,7 @@ export function useOTPs(): [Array<OTP>, boolean] {
         getToaster().show({
             intent: Intent.DANGER,
             message: t("error.desktop.otps-fetch-failed", { message: localisedErrorMessage(error) }),
-            timeout: 10000
+            timeout: 5000
         });
     }, [error]);
     useEffect(() => {
@@ -117,7 +117,7 @@ export function useRecentEntries(): Array<SearchResult> {
         getToaster().show({
             intent: Intent.DANGER,
             message: t("error.desktop.search-failed", { message: localisedErrorMessage(error) }),
-            timeout: 10000
+            timeout: 5000
         });
     }, [error]);
     return value === null ? [] : value;
@@ -137,7 +137,7 @@ export function useSearchedEntries(term: string): Array<SearchResult> {
         getToaster().show({
             intent: Intent.DANGER,
             message: t("error.desktop.search-failed", { message: localisedErrorMessage(error) }),
-            timeout: 10000
+            timeout: 5000
         });
     }, [error]);
     useEffect(() => {
@@ -160,7 +160,7 @@ export function useVaultSources(): Array<VaultSourceDescription> {
         getToaster().show({
             intent: Intent.DANGER,
             message: t("error.desktop.sources-fetch-failed", { message: localisedErrorMessage(error) }),
-            timeout: 10000
+            timeout: 5000
         });
     }, [error]);
     return sources === null || error ? [] : sources;

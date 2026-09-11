@@ -29,7 +29,7 @@ export function SaveCredentialsPage() {
             getToaster().show({
                 intent: Intent.SUCCESS,
                 message: t("save-credentials-page.save-success", { title: credentials.title }),
-                timeout: 4000
+                timeout: 2000
             });
             setTimeout(() => {
                 closeCurrentTab();
@@ -39,7 +39,7 @@ export function SaveCredentialsPage() {
             getToaster().show({
                 intent: Intent.DANGER,
                 message: t("save-credentials-page.save-error", { message: localisedErrorMessage(err) }),
-                timeout: 10000
+                timeout: 5000
             });
         }
     }, []);

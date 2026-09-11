@@ -63,7 +63,7 @@ export function AboutPage(_: AboutPageProps) {
             getToaster().show({
                 intent: Intent.DANGER,
                 message: t("error.generic", { message: localisedErrorMessage(err) }),
-                timeout: 10000
+                timeout: 5000
             });
         }
     }, []);

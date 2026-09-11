@@ -94,13 +94,13 @@ export function OTPItem(props: OTPItemProps) {
             getToaster().show({
                 intent: Intent.SUCCESS,
                 message: t("popup.otps.copy.success"),
-                timeout: 4000
+                timeout: 2000
             });
         } catch (err) {
             getToaster().show({
                 intent: Intent.DANGER,
                 message: t("popup.otps.copy.error", { message: localisedErrorMessage(err) }),
-                timeout: 10000
+                timeout: 5000
             });
         }
     }, [otp.digits]);

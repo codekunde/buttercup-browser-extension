@@ -94,7 +94,7 @@ function OTPsPageList(props: OTPsPageProps) {
                 getToaster().show({
                     intent: Intent.PRIMARY,
                     message: t("popup.otps.click.no-url-available"),
-                    timeout: 3000
+                    timeout: 2000
                 });
                 return;
             }
@@ -104,7 +104,7 @@ function OTPsPageList(props: OTPsPageProps) {
                     getToaster().show({
                         intent: Intent.DANGER,
                         message: t("popup.otps.click.open-error", { message: localisedErrorMessage(err) }),
-                        timeout: 10000
+                        timeout: 5000
                     });
                 });
         }

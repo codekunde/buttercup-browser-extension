@@ -44,13 +44,13 @@ export function EntryInfoDialog(props: EntryInfoDialogProps) {
             getToaster().show({
                 intent: Intent.SUCCESS,
                 message: t("popup.entries.info.copy-success", { property }),
-                timeout: 4000
+                timeout: 2000
             });
         } catch (err) {
             getToaster().show({
                 intent: Intent.DANGER,
                 message: t("popup.entries.info.copy-error", { message: localisedErrorMessage(err) }),
-                timeout: 10000
+                timeout: 5000
             });
         }
     }, []);

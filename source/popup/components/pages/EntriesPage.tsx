@@ -114,7 +114,7 @@ function EntriesPageList(props: EntriesPageProps) {
                         getToaster().show({
                             intent: Intent.PRIMARY,
                             message: t("popup.entries.click.no-url-available"),
-                            timeout: 3000
+                            timeout: 2000
                         });
                     }
                 })
@@ -123,7 +123,7 @@ function EntriesPageList(props: EntriesPageProps) {
                     getToaster().show({
                         intent: Intent.DANGER,
                         message: t("popup.entries.click.open-error", { message: localisedErrorMessage(err) }),
-                        timeout: 10000
+                        timeout: 5000
                     });
                 });
         }
@@ -132,7 +132,7 @@ function EntriesPageList(props: EntriesPageProps) {
             getToaster().show({
                 intent: Intent.DANGER,
                 message: t("popup.entries.click.recent-set-error", { message: localisedErrorMessage(err) }),
-                timeout: 10000
+                timeout: 5000
             });
         });
     }, [popupSource]);

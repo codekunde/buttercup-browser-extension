@@ -67,7 +67,7 @@ export function Navigator(props: NavigatorProps) {
             getToaster().show({
                 intent: Intent.DANGER,
                 message: t("popup.connection.open-error", { message: localisedErrorMessage(err) }),
-                timeout: 10000
+                timeout: 5000
             });
         }
     }, []);
@@ -79,7 +79,7 @@ export function Navigator(props: NavigatorProps) {
             getToaster().show({
                 intent: Intent.DANGER,
                 message: t("popup.connection.reauth-error", { message: localisedErrorMessage(err) }),
-                timeout: 10000
+                timeout: 5000
             });
             return;
         }

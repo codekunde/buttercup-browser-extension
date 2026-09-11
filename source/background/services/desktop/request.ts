@@ -70,12 +70,35 @@ export async function sendDesktopRequest<O extends OutputType>(
         }
     }
     // Make request
-    const resp = await fetch(url, requestConfig);
+    let resp: Response;
+    try {
+        resp = await fetch(url, requestConfig);
+    } catch (err) {
+        // Network-level failure (fetch rejects, e.g. TypeError: Failed to
+        // fetch): the desktop app isn't reachable at all - not running,
+        // browser access disabled in its settings, or blocked by a
+        // firewall. This is distinct from a request that reached the
+        // desktop app but was rejected (handled below).
+        throw new Layerr(
+            {
+                cause: err,
+                info: {
+                    code: "desktop-unreachable",
+                    i18n: "error.code.desktop-unreachable"
+                }
+            },
+            "Failed to reach the Buttercup desktop app"
+        );
+    }
     if (!resp.ok) {
         throw new Layerr(
             {
                 info: {
                     code: "desktop-request-failed",
+                    i18n:
+                        resp.status === 403
+                            ? "error.code.desktop-connection-forbidden"
+                            : "error.code.desktop-request-failed",
                     status: resp.status,
                     statusText: resp.statusText
                 }

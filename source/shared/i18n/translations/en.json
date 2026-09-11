@@ -74,8 +74,10 @@
     },
     "error": {
         "code": {
+            "desktop-connection-forbidden": "The desktop app rejected this connection (403 Forbidden). Try \"Reset Application Data\" in Settings, then reconnect. If that doesn't help, check that the desktop app and extension are both up to date.",
             "desktop-connection-not-authorised": "Desktop connection has not been authorised",
-            "desktop-request-failed": "Desktop request failed"
+            "desktop-request-failed": "Desktop request failed",
+            "desktop-unreachable": "Could not reach the Buttercup desktop app. Make sure it's running, that browser access is enabled in its settings, and that no firewall is blocking local connections."
         },
         "desktop": {
             "connection-check-failed": "Failed checking desktop connection: {{message}}",
@@ -162,7 +164,7 @@
             },
             "copy": {
                 "error": "Failed copying OTP code: {{message}}",
-                "success": "Copied OTP code to clipboard",
+                "success": "OTP copied",
                 "tooltip": "Copy code"
             }
         },
