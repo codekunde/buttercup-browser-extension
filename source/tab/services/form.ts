@@ -20,7 +20,7 @@ function nudgeFieldValidation(input: HTMLInputElement | null | undefined) {
     }
 }
 
-export async function fillFormDetails(frameEvent: FrameEvent): Promise<void> {
+export function fillFormDetails(frameEvent: FrameEvent): void {
     const { currentLoginTarget: loginTarget } = FORM;
     const { inputDetails } = frameEvent;
     if (!inputDetails) {
@@ -29,17 +29,19 @@ export async function fillFormDetails(frameEvent: FrameEvent): Promise<void> {
     if (!loginTarget) {
         throw new Error("No login target found");
     }
+    // Locust types characters in with a small per-character delay, so
+    // awaiting these before closing the popup (as this used to) made the
+    // popup visibly hang open for the whole fill. Let each field type out
+    // and nudge independently in the background instead, closing straight
+    // away like before the keyboard nudge was added.
     if (inputDetails.username) {
-        await loginTarget.fillUsername(inputDetails.username);
-        nudgeFieldValidation(loginTarget.usernameField);
+        loginTarget.fillUsername(inputDetails.username).then(() => nudgeFieldValidation(loginTarget.usernameField));
     }
     if (inputDetails.password) {
-        await loginTarget.fillPassword(inputDetails.password);
-        nudgeFieldValidation(loginTarget.passwordField);
+        loginTarget.fillPassword(inputDetails.password).then(() => nudgeFieldValidation(loginTarget.passwordField));
     }
     if (inputDetails.otp) {
-        await loginTarget.fillOTP(inputDetails.otp);
-        nudgeFieldValidation(loginTarget.otpField);
+        loginTarget.fillOTP(inputDetails.otp).then(() => nudgeFieldValidation(loginTarget.otpField));
     }
     FORM.currentFormID = null;
     FORM.currentLoginTarget = null;

@@ -132,6 +132,15 @@ function renderButtonStyle(input: HTMLInputElement, onClick: () => void, reattac
     mount(input.offsetParent, button);
     const reprocessButton = () => {
         try {
+            if (!input.offsetParent) {
+                // The input (or an ancestor) is currently hidden - e.g. an
+                // inactive tab within a modal. offsetLeft/offsetTop read 0
+                // in this state, which would snap the button to the top of
+                // its own (still-visible) mount container. Leave the button
+                // exactly where it is instead; the next tick after the
+                // input is visible again will restore its correct position.
+                return;
+            }
             left = calculateLeft();
             top = input.offsetTop;
             setStyle(button, {
