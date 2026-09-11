@@ -65,9 +65,12 @@ export async function getVaultSources(): Promise<Array<VaultSourceDescription>> 
         route: "/v1/vaults",
         auth: authHeader
     })) as {
-        sources: Array<VaultSourceDescription>;
+        sources?: Array<VaultSourceDescription>;
     };
-    return sources;
+    // Defensive: callers (e.g. GetRecentEntries) reduce/map over this
+    // result directly, and a response missing the "sources" property
+    // shouldn't crash them.
+    return sources ?? [];
 }
 
 export async function getVaultsTree(): Promise<VaultsTree> {

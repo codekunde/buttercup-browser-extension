@@ -11,6 +11,7 @@ _Codekunde fork_
  * **Bugfix**:
    * "Save Login" prompt reappearing after clicking Disable on a multi-domain/SSO login (e.g. federated Microsoft logins) — the credential's save-prompt flag was never cleared on Disable, only on Close
    * ([#482](https://github.com/buttercup/buttercup-browser-extension/issues/482)) Autofilled fields not registering as filled on some SPA login forms (e.g. Microsoft/Okta-style "Next" button staying disabled) — added a keyboard-event nudge after fill, partial fix
+   * ([#486](https://github.com/buttercup/buttercup-browser-extension/issues/486)) Popup crash when Chrome's Site access is set to "On click" — background message handling could run before the service worker finished initialising, and vault-source lookups could crash on an unexpected empty response
  * Build fixes: Node 22+ compatibility, Windows-compatible `build`/`dev` scripts, LF normalisation
  * Fork rebrand: extension name, Firefox add-on ID, `@buttercup/locust` pinned
 

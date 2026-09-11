@@ -31,7 +31,7 @@ import {
 import { getConfig, updateConfigValue } from "./config.js";
 import { disableLoginsOnDomain, getDisabledDomains, removeDisabledFlagForDomain } from "./disabledDomains.js";
 import { log } from "./log.js";
-import { resetInitialisation } from "./init.js";
+import { resetInitialisation, waitForInitialisation } from "./init.js";
 import { getRecents, trackRecentUsage } from "./recents.js";
 import { openEntryPageInNewTab } from "./entry.js";
 import { getAutoLoginForTab, registerAutoLogin } from "./autoLogin.js";
@@ -52,6 +52,11 @@ async function handleMessage(
     sender: chrome.runtime.MessageSender,
     sendResponse: (resp: BackgroundResponse) => void
 ) {
+    // MV3 service workers are woken on demand and can receive a message
+    // (e.g. from a popup opening) before background initialise() has
+    // finished - notably before config.ts's getConfig() has a value to
+    // return. Wait for it rather than letting every handler race it.
+    await waitForInitialisation();
     switch (msg.type) {
         case BackgroundMessageType.AuthenticateDesktopConnection: {
             const { code } = msg;
